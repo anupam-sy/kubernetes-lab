@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-dep
+  labels:
+    app: myapp
+    env: dev
+    tier: front-end
+spec:
+  selector:
+    matchLabels:
+      tier: front-end
+  replicas: 4
+  template:
+    metadata:
+      name: nginx
+      labels:
+        tier: front-end
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "100Mi"
+              cpu: "100m"
+              ephemeral-storage: "100Mi"
+            requests:
+              memory: "50Mi"
+              cpu: "50m"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
+            - name: secret-volume
+              mountPath: /etc/secret
+      volumes:
+        - name: config-volume
+          configMap:
+            name: myapp-cmap
+        - name: secret-volume
+          secret:
+            secretName: myapp-secret

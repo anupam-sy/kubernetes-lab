@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+    env: dev
+spec:
+  containers:
+    - name: myapp-container
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+        requests:
+          memory: "50Mi"
+          cpu: "50m"
+      env:
+        - name: ENV_NAME
+          value: dev
+        - name: UNAME
+          valueFrom:
+            configMapKeyRef:
+              name: myapp-cmap
+              key: myapp-username
+        - name: UPASS
+          valueFrom:
+            secretKeyRef:
+              name: myapp-secret
+              key: myapp-password
