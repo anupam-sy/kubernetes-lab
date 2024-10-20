@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: myapp-dep
+  labels:
+    app: myapp
+    env: dev
+    tier: back-end
+spec:
+  serviceName: myapp-headless-service
+  selector:
+    matchLabels:
+      tier: back-end
+  replicas: 2
+  template:
+    metadata:
+      name: mysql
+      labels:
+        tier: back-end
+    spec:
+      containers:
+        - name: mysql-container
+          image: redis:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "100Mi"
+              cpu: "100m"
+              ephemeral-storage: "100Mi"
+            requests:
+              memory: "50Mi"
+              cpu: "50m"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
+            - name: secret-volume
+              mountPath: /etc/secret
+            - name: myapp-custom-pvc
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: config-volume
+          configMap:
+            name: myapp-cmap
+        - name: secret-volume
+          secret:
+            secretName: myapp-secret
+  volumeClaimTemplates:
+    - metadata:
+        name: myapp-custom-pvc
+        labels:
+          app: myapp
+          env: dev
+          tier: back-end
+      spec:
+        resources:
+          requests:
+            storage: 5Gi
+        storageClassName: myapp-custom-sc
+        accessModes:
+          - ReadWriteOnce
