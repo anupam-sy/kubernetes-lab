@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: myapp-std-pvc
+  labels:
+    app: myapp
+    env: dev
+    tier: front-end
+spec:
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: standard-rwo
+  accessModes:
+    - ReadWriteOnce

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-lb-service
+  labels:
+    app: myapp
+    env: dev
+    tier: front-end
+spec:
+  type: LoadBalancer
+  selector:
+    tier: front-end
+  ports:
+  - port: 80
+    targetPort: 80
