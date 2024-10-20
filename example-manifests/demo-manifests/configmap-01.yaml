@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myapp-cmap
+  labels:
+    app: myapp
+    env: dev
+    tier: front-end
+data:
+  myapp-username: anupam
