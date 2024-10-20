@@ -35,6 +35,8 @@ spec:
               mountPath: /etc/config
             - name: secret-volume
               mountPath: /etc/secret
+            - name: pvc-volume
+              mountPath: /var/log/nginx
       volumes:
         - name: config-volume
           configMap:
@@ -42,3 +44,6 @@ spec:
         - name: secret-volume
           secret:
             secretName: myapp-secret
+        - name: pvc-volume
+          persistentVolumeClaim:
+            claimName: myapp-std-pvc
