@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-external-db-service
+  labels:
+    app: myapp
+    env: dev
+    tier: back-end
+spec:
+  type: ExternalName
+  externalName: 35.184.228.151 # Update your external service Public IP
