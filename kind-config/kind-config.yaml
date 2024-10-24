@@ -1,0 +1,12 @@
+# kind create cluster --config kind-config.yaml
+# kubectl config get-contexts
+# kubectl config use-context kind-cluster
+# kubectl cluster-info
+
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: cluster
+networking:
+  disableDefaultCNI: false # Optional: if you want to manage networking yourself
+nodes:
+  - role: control-plane
