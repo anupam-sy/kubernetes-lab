@@ -8,7 +8,7 @@ metadata:
     tier: front-end
     project: goto-codes
 spec:
-  replicas: 2
+  replicas: 2 # Optional: initial replica count
   selector:
     matchLabels:
       app: eapp-flask
@@ -23,6 +23,9 @@ spec:
       - name: eapp-flask-ctr
         image: ghcr.io/anupam-sy/example-app/eapp:dev-2-cef7980
         resources:
+          requests:
+            memory: "5Mi"
+            cpu: "5m"
           limits:
             memory: "50Mi"
             cpu: "50m"
