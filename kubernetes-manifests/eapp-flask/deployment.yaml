@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eapp-flask-dep
+  labels:
+    app: eapp-flask
+    env: dev
+    tier: front-end
+    project: goto-codes
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: eapp-flask
+      tier: front-end
+  template:
+    metadata:
+      labels:
+        app: eapp-flask
+        tier: front-end
+    spec:
+      containers:
+      - name: eapp-flask-ctr
+        image: ghcr.io/anupam-sy/example-app/eapp:dev-2-cef7980
+        resources:
+          limits:
+            memory: "50Mi"
+            cpu: "50m"
+        ports:
+        - containerPort: 4999
