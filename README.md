@@ -1,4 +1,4 @@
-# K8S Lab Manifests
+# Kubernetes Lab
 This repository contains kubernetes manifest files to deploy various kubernetes objects for learning and testing different K8S concepts.
 
 ## Prerequisites
@@ -26,7 +26,7 @@ To execute the manifest files, go to command prompt and then run the following c
 - `kubectl top nodes/pods` # To get the resource usage metrics, such as CPU and memory, for Kubernetes nodes or pods.
 
 > [!TIP]
-> See the [Kubectl documentation](https://kubernetes.io/docs/reference/kubectl/) for details list of commands.
+> See the [Kubectl documentation](https://kubernetes.io/docs/reference/kubectl/) for full list of commands.
 
 ## References
 - https://kubernetes.io/docs/concepts/
